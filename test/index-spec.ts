@@ -1,23 +1,66 @@
 import {expect} from "chai";
+import {mkdirSync, writeFileSync} from "fs";
 import {ConvenientPatch, DiffFile, Repository, Tag} from "nodegit";
-import GitDiffCommits from "../src/index";
+import {resolve} from "path";
+import {sync as rmSync} from "rimraf";
+import GitFilterFile from "../src/index";
 
-describe("diff files between commits", () => {
-  it("should get modified package.json", (done) => {
-    const diff = new GitDiffCommits("./", "1fb5a328806fa8dd8", null);
+describe("get git state uncommit files.", () => {
+  it("should get one uncommit file/test.txt", (done) => {
+    rmSync(resolve(__dirname, "file"));
+    mkdirSync(resolve(__dirname, "file"));
+    writeFileSync(resolve(__dirname, "file/test.txt"), "test");
 
-    diff.start()
-      .then((result) => {
-        return result[0].patches();
-      })
-      .then((arrayConvenientPatch: ConvenientPatch[]) => {
-        arrayConvenientPatch.forEach((patch) => {
-          console.log(patch.newFile().path());
-        });
+    const filterFile = new GitFilterFile("./", ".txt");
+    filterFile.start()
+      .then((files) => {
+        expect(files.length).equal(1);
+        expect(files[0].path() === "file/test.txt");
+        rmSync(resolve(__dirname, "file"));
         done();
       })
-      .catch((err) => {
-        done(new Error(err));
+      .catch((e) => {
+        done(new Error(e));
+      });
+  });
+
+  it ("should get two uncommit files .txt extension", (done) => {
+    rmSync(resolve(__dirname, "file"));
+    mkdirSync(resolve(__dirname, "file"));
+    writeFileSync(resolve(__dirname, "file/test.txt"), "test");
+    writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
+
+    const filterFile = new GitFilterFile("./", ".txt");
+    filterFile.start()
+      .then((files) => {
+        expect(files.length).equal(2);
+        expect(files[0].path() === "file/test.txt");
+        expect(files[1].path() === "file/test2.txt");
+        rmSync(resolve(__dirname, "file"));
+        done();
+      })
+      .catch((e) => {
+        done(new Error(e));
+      });
+  });
+
+  it ("should get two uncommit files .wow extension", (done) => {
+    rmSync(resolve(__dirname, "file"));
+    mkdirSync(resolve(__dirname, "file"));
+    writeFileSync(resolve(__dirname, "file/test.txt"), "test");
+    writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
+    writeFileSync(resolve(__dirname, "file/test.wow"), "test");
+
+    const filterFile = new GitFilterFile("./", ".wow");
+    filterFile.start()
+      .then((files) => {
+        expect(files.length).equal(1);
+        expect(files[0].path() === "file/test.wow");
+        rmSync(resolve(__dirname, "file"));
+        done();
+      })
+      .catch((e) => {
+        done(new Error(e));
       });
   });
 });

@@ -1,7 +1,7 @@
 {
-  "name": "git-diff-commit",
+  "name": "@canner/git-status-filter-file-extension",
   "version": "0.0.0",
-  "description": "git-diff-commit",
+  "description": "get git current uncommit status, and filter with file extension.",
   "license": "MIT",
   "repository": "",
   "author": "",
@@ -31,6 +31,7 @@
     "@types/mocha": "^2.0.0",
     "@types/node": "^7.0.0",
     "@types/nodegit": "^0.18.0",
+    "@types/rimraf": "0.0.28",
     "chai": "^3.0.0",
     "coveralls": "^2.0.0",
     "mocha": "^3.0.0",
