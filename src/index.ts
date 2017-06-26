@@ -21,10 +21,8 @@ export interface IFileStatus {
 
 export default class GitStatusFilterFileExt {
   private dirPath: string;
-  private ext: string;
 
-  constructor(dirPath: string, ext: string) {
-    this.ext = ext;
+  constructor(dirPath: string, readonly ext: string) {
     this.dirPath = resolve(process.cwd(), dirPath);
   }
 
