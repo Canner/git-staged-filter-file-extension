@@ -5,7 +5,7 @@ get git current uncommit status, and filter with file extension.
 ## Install
 
 ```
-npm install @canner/git-status-filter-file-extension
+npm install git-status-filter-file-extension
 ```
 
 ## Usage
