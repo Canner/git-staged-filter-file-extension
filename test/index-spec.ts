@@ -63,4 +63,23 @@ describe("get git state uncommit files.", () => {
         done(new Error(e));
       });
   });
+
+  it ("should get multiple file extension files.", (done) => {
+    rmSync(resolve(__dirname, "file"));
+    mkdirSync(resolve(__dirname, "file"));
+    writeFileSync(resolve(__dirname, "file/test.txt"), "test");
+    writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
+    writeFileSync(resolve(__dirname, "file/test.wow"), "test");
+
+    const filterFile = new GitFilterFile("./", [".wow", ".txt"]);
+    filterFile.start()
+      .then((files) => {
+        expect(files.length).equal(3);
+        rmSync(resolve(__dirname, "file"));
+        done();
+      })
+      .catch((e) => {
+        done(new Error(e));
+      });
+  });
 });

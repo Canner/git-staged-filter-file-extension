@@ -12,6 +12,8 @@ npm install git-status-filter-file-extension
 
 ```ts
 const filterFile = new GitFilterFile("./", ".wow");
+// multiple file extensions
+// const filterFile = new GitFilterFile("./", [".wow", ".txt"]);
 
 filterFile.start()
   .then((filesArr) => {

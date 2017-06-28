@@ -22,7 +22,7 @@ export interface IFileStatus {
 export default class GitStatusFilterFileExt {
   private dirPath: string;
 
-  constructor(dirPath: string, readonly ext: string) {
+  constructor(dirPath: string, readonly ext: string[] | string) {
     this.dirPath = resolve(process.cwd(), dirPath);
   }
 
@@ -38,7 +38,11 @@ export default class GitStatusFilterFileExt {
 
   private filterFiles = (arrayStatusFile: IFileStatus[]) => {
     return arrayStatusFile.filter((file) => {
-      return extname(file.path()) === this.ext;
+      const fileExt = extname(file.path());
+      if (typeof this.ext === "string") {
+        return fileExt === this.ext;
+      }
+      return this.ext.indexOf(fileExt) !== -1;
     });
   }
 }
