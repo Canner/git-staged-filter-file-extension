@@ -23,7 +23,7 @@ export default class GitStatusFilterFileExt {
   private dirPath: string;
 
   constructor(dirPath: string, readonly ext: string[] | string) {
-    this.dirPath = resolve(process.cwd(), dirPath);
+    this.dirPath = resolve(__dirname, dirPath);
   }
 
   public start(): Promise<IFileStatus[]> {

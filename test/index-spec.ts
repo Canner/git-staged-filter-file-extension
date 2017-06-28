@@ -11,7 +11,7 @@ describe("get git state uncommit files.", () => {
     mkdirSync(resolve(__dirname, "file"));
     writeFileSync(resolve(__dirname, "file/test.txt"), "test");
 
-    const filterFile = new GitFilterFile("./", ".txt");
+    const filterFile = new GitFilterFile("../", ".txt");
     filterFile.start()
       .then((files) => {
         expect(files.length).equal(1);
@@ -30,7 +30,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test.txt"), "test");
     writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
 
-    const filterFile = new GitFilterFile("./", ".txt");
+    const filterFile = new GitFilterFile("../", ".txt");
     filterFile.start()
       .then((files) => {
         expect(files.length).equal(2);
@@ -51,7 +51,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
     writeFileSync(resolve(__dirname, "file/test.wow"), "test");
 
-    const filterFile = new GitFilterFile("./", ".wow");
+    const filterFile = new GitFilterFile("../", ".wow");
     filterFile.start()
       .then((files) => {
         expect(files.length).equal(1);
@@ -71,7 +71,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
     writeFileSync(resolve(__dirname, "file/test.wow"), "test");
 
-    const filterFile = new GitFilterFile("./", [".wow", ".txt"]);
+    const filterFile = new GitFilterFile("../", [".wow", ".txt"]);
     filterFile.start()
       .then((files) => {
         expect(files.length).equal(3);
