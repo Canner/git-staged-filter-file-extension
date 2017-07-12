@@ -1,6 +1,6 @@
 {
   "name": "git-status-filter-file-extension",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "get git current uncommit status, and filter with file extension.",
   "license": "MIT",
   "repository": "",
