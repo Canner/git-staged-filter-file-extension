@@ -1,4 +1,5 @@
 
+import * as minimatch from "minimatch";
 import {DiffDelta, Repository} from "nodegit";
 import {extname, resolve} from "path";
 
@@ -19,10 +20,15 @@ export interface IFileStatus {
   statusBit(): number;
 }
 
+export interface Ioptions {
+  ext?: string | string[];
+  pattern?: string;
+}
+
 export default class GitStatusFilterFileExt {
   private dirPath: string;
 
-  constructor(dirPath: string, readonly ext: string[] | string) {
+  constructor(dirPath: string, readonly options?: Ioptions) {
     this.dirPath = resolve(__dirname, dirPath);
   }
 
@@ -37,12 +43,23 @@ export default class GitStatusFilterFileExt {
   }
 
   private filterFiles = (arrayStatusFile: IFileStatus[]) => {
+    const pattern = this.options.pattern;
+    const ext = this.options.ext;
+
     return arrayStatusFile.filter((file) => {
+      const filePath = file.path();
       const fileExt = extname(file.path());
-      if (typeof this.ext === "string") {
-        return fileExt === this.ext;
+      const matchPattern = pattern ? minimatch(filePath, pattern, {matchBase: true}) : true;
+
+      if (typeof ext === "string") {
+        // if options ext is string
+        return fileExt === ext && matchPattern;
+      } else if (Array.isArray(ext)) {
+        // if options is array
+        return ext.indexOf(fileExt) !== -1 && matchPattern;
       }
-      return this.ext.indexOf(fileExt) !== -1;
+
+      return matchPattern;
     });
   }
 }
