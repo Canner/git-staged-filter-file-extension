@@ -3,6 +3,8 @@ import {spawn} from "child_process";
 import * as minimatch from "minimatch";
 import {extname, resolve} from "path";
 
+export type StatusTypes = "A" | "C" | "D" | "M" | "R" | "T" | "U" | "X";
+
 export interface IFileStatus {
   path: string;
 
@@ -15,7 +17,7 @@ export interface IFileStatus {
   // T: change in the type of the file
   // U: file is unmerged (you must complete the merge before it can be committed)
   // X: "unknown" change type (most probably a bug, please report it)
-  status: "A" | "C" | "D" | "M" | "R" | "T" | "U" | "X";
+  status: StatusTypes;
 }
 
 export interface Ioptions {
@@ -30,7 +32,7 @@ export default class GitStatusFilterFileExt {
     this.dirPath = resolve(__dirname, dirPath);
   }
 
-  public start(): Promise<any> {
+  public start(): Promise<IFileStatus[]> {
     const {ext, pattern} = this.options;
     const gitDiff = spawn("git", [
       `--git-dir=${this.dirPath}/.git`,
@@ -80,10 +82,12 @@ export default class GitStatusFilterFileExt {
         const resultArr = result.split("\n").slice(0, -1);
         return resolved(resultArr.map((file) => {
           const fileStatus = file.split("\t");
+          const status: StatusTypes = fileStatus[0] as StatusTypes;
+          const path: string = fileStatus[1];
 
           return {
-            path: fileStatus[1],
-            status: fileStatus[0],
+            path,
+            status,
           };
         }));
       });
