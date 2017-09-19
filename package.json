@@ -1,6 +1,6 @@
 {
   "name": "git-staged-filter-file-extension",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "get git current staged files, and filter with file extension.",
   "license": "MIT",
   "repository": "",

@@ -1,6 +1,5 @@
 /* tslint:disable no-console */
 import {spawn} from "child_process";
-import * as minimatch from "minimatch";
 import {extname, resolve} from "path";
 
 export type StatusTypes = "A" | "C" | "D" | "M" | "R" | "T" | "U" | "X";
