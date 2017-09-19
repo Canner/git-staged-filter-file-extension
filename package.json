@@ -1,6 +1,6 @@
 {
   "name": "git-status-filter-file-extension",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "get git current uncommit status, and filter with file extension.",
   "license": "MIT",
   "repository": "",
@@ -24,9 +24,6 @@
     "watch:test": "npm run test -- --watch"
   },
   "dependencies": {
-    "@types/nodegit": "^0.18.0",
-    "minimatch": "^3.0.4",
-    "nodegit": "^0.18.3"
   },
   "devDependencies": {
     "@types/chai": "^3.0.0",
