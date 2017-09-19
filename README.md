@@ -1,6 +1,6 @@
 # git-status-filter-file-extension
 
-get git current uncommit status, and filter with file extension.
+get git staged files, and filter with file extension.
 
 ## Install
 
