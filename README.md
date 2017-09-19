@@ -1,11 +1,11 @@
-# git-status-filter-file-extension
+# git-staged-filter-file-extension
 
 get git staged files, and filter with file extension.
 
 ## Install
 
 ```
-npm install git-status-filter-file-extension
+npm install git-staged-filter-file-extension
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ export interface IFileStatus {
 
 ## API
 
-#### GitFilterFile(<.git path>, options)
+#### GitStagedFilterFile(<.git path>, options)
 
 - .git path: where your git repo lives.
 - options: should pass a object, like below.

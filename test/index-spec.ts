@@ -3,7 +3,7 @@ import {exec, execSync} from "child_process";
 import {mkdirSync, writeFileSync} from "fs";
 import {resolve} from "path";
 import {sync as rmSync} from "rimraf";
-import GitFilterFile from "../src/index";
+import GitStagedFilterFile from "../src/index";
 
 describe("get git state uncommit files.", () => {
   before(() => {
@@ -22,7 +22,7 @@ describe("get git state uncommit files.", () => {
   it("should get one uncommit file/test.txt", (done) => {
     writeFileSync(resolve(__dirname, "file/test.txt"), "test");
     exec("git add .", (err, stdout, stderr) => {
-      const filterFile = new GitFilterFile("../", {ext: ".txt"});
+      const filterFile = new GitStagedFilterFile("../", {ext: ".txt"});
       filterFile.start()
         .then((files) => {
           expect(files.length).equal(1);
@@ -41,7 +41,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test2.txt"), "test");
 
     exec("git add .", (err, stdout, stderr) => {
-      const filterFile = new GitFilterFile("../", {ext: ".txt"});
+      const filterFile = new GitStagedFilterFile("../", {ext: ".txt"});
       filterFile.start()
         .then((files) => {
           expect(files.length).equal(2);
@@ -63,7 +63,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test.wow"), "test");
 
     exec("git add .", (err, stdout, stderr) => {
-      const filterFile = new GitFilterFile("../", {ext: ".wow"});
+      const filterFile = new GitStagedFilterFile("../", {ext: ".wow"});
       filterFile.start()
         .then((files) => {
           expect(files.length).equal(1);
@@ -83,7 +83,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test.wow"), "test");
 
     exec("git add .", (err, stdout, stderr) => {
-      const filterFile = new GitFilterFile("../", {ext: [".wow", ".txt"]});
+      const filterFile = new GitStagedFilterFile("../", {ext: [".wow", ".txt"]});
       filterFile.start()
         .then((files) => {
           expect(files.length).equal(3);
@@ -101,7 +101,7 @@ describe("get git state uncommit files.", () => {
     writeFileSync(resolve(__dirname, "file/test.wow"), "test");
 
     exec("git add .", (err, stdout, stderr) => {
-      const filterFile = new GitFilterFile("../", {pattern: "\.txt$"});
+      const filterFile = new GitStagedFilterFile("../", {pattern: "\.txt$"});
       filterFile.start()
         .then((files) => {
           expect(files.length).equal(2);

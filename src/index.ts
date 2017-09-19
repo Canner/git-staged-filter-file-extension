@@ -25,7 +25,7 @@ export interface Ioptions {
   pattern?: string | string[];
 }
 
-export default class GitStatusFilterFileExt {
+export default class GitStagedFilterFileExt {
   private dirPath: string;
 
   constructor(dirPath: string, readonly options?: Ioptions) {

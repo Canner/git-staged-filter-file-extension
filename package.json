@@ -1,7 +1,7 @@
 {
-  "name": "git-status-filter-file-extension",
+  "name": "git-staged-filter-file-extension",
   "version": "1.0.2",
-  "description": "get git current uncommit status, and filter with file extension.",
+  "description": "get git current staged files, and filter with file extension.",
   "license": "MIT",
   "repository": "",
   "author": "",
