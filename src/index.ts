@@ -39,7 +39,6 @@ export default class GitStatusFilterFileExt {
       "diff",
       "--cached",
       "--name-status",
-      "--diff-filter=ACM",
     ]);
 
     // filter extensions or pattern
