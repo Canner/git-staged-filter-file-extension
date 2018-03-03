@@ -1,5 +1,7 @@
 # git-staged-filter-file-extension
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Canner/git-staged-filter-file-extension.svg)](https://greenkeeper.io/)
+
 get git staged files, and filter with file extension.
 
 ## Install
